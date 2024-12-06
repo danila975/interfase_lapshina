@@ -8,7 +8,7 @@ import HelloWorld from './components/HelloWorld.vue'
   header
     div(class="wrapper")
       HelloWorld(msg="You did it!")
-      MyComponent
+      component1
       nav
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
