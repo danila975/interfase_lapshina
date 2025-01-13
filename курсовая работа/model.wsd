@@ -1,0 +1,77 @@
+    @startuml
+skinparam style strictuml
+
+package "Приложение" {
+  class UserProfile {
+    +handleUploadedFile(fileData)
+    +handleUploadError(error)
+    +handleRegistration(data)
+    +handlePost(postText)
+    +handleMessage(messageText)
+  }
+
+  package "Компоненты" {
+    class FileUpload {
+      +onUploaded(fileData)
+      +onFailed(error)
+    }
+
+    class RegistrationForm {
+      +onRegister(data)
+      --
+      - email: String
+      - phone: String
+      - gender: String
+      - ageGroups: List<String>
+      - emailInvalid: Boolean
+      - phoneInvalid: Boolean
+      --
+      +validateEmail()
+      +validatePhone()
+      +register()
+      +handleAgeGroupChange(event)
+    }
+
+    class PostForm {
+      +onPost(postText)
+    }
+
+    class MessageForm {
+      +onSend(messageText)
+    }
+  }
+}
+
+UserProfile "1" *-- "1..*" FileUpload : использует
+UserProfile "1" *-- "1..*" RegistrationForm : использует
+UserProfile "1" *-- "1..*" PostForm : использует
+UserProfile "1" *-- "1..*" MessageForm : использует
+
+note right of FileUpload
+- Загружает файлы
+- Обрабатывает успешную
+  и неудачную загрузку
+end note
+
+note right of RegistrationForm
+- Регистрация пользователя
+- Поля:
+  - email
+  - phone
+  - gender
+  - ageGroups
+- Методы валидации
+- Обработка регистрации
+end note
+
+note right of PostForm
+- Создание постов
+- Отправка контента
+end note
+
+note right of MessageForm
+- Отправка сообщений
+- Валидация ввода
+end note
+
+@enduml

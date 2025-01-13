@@ -1,4 +1,4 @@
-это код userprofile.vue. исправь его, чтобы ошибки не возникала: <template>
+<template>
   <div>
     <h1>Профиль пользователя</h1>
     <FileUpload @uploaded="handleUploadedFile" />
